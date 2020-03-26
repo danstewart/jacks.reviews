@@ -1,0 +1,16 @@
+$link: #77ddc4;
+$link-hover: lighten($link, 5);
+$link-focus: darken($link, 5);
+$link-active: darken($link, 5);
+$link-focus-border: $grey-light;
+
+$pagination-color: $link;
+
+$navbar-item-hover-color: $link;
+$navbar-item-active-color: $link;
+$navbar-dropdown-item-active-color: $link;
+
+$radius: 0px;
+$control-border-width: 2px;
+$input-shadow: none;
+$family-sans-serif: "IBM Plex Sans", sans-serif;

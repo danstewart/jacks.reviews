@@ -1,0 +1,43 @@
+@charset "utf-8";
+
+// Import a Google Font
+@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans');
+
+// My defaults 
+// $primary: #59955C;
+
+// Import custom bulmaswatch variables
+@import "../node_modules/bulmaswatch/darkly/variables";
+
+// My overrides
+@import "variables.scss";
+
+// Import from Bulma
+@import "../node_modules/bulma/sass/utilities/_all.sass";
+@import "../node_modules/bulma/sass/base/_all.sass";
+@import "../node_modules/bulma/sass/components/_all.sass";
+@import "../node_modules/bulma/sass/elements/_all.sass";
+@import "../node_modules/bulma/sass/grid/_all.sass";
+@import "../node_modules/bulma/sass/layout/_all.sass";
+
+// Import the bulmaswatch overrides
+@import "../node_modules/bulmaswatch/darkly/_overrides.scss";
+
+.loader {
+  animation: spinAround 500ms infinite linear;
+  border: 2px solid $primary;
+  border-radius: $radius-rounded;
+  border-right-color: transparent;
+  border-top-color: transparent;
+  content: "";
+  display: block;
+  height: 1em;
+  position: relative;
+  width: 1em;
+}
+
+$placeholder-color: #828282;
+::placeholder {
+   color: $placeholder-color !important;
+   opacity: 1 !important;
+}

@@ -5,4 +5,5 @@
 api/config/master.key
 
 # custom_bulma
-custom_bulma/package-lock.json # always want the latest deps
+# always want latest deps for bulma
+custom_bulma/package-lock.json

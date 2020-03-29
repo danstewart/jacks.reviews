@@ -1,13 +1,19 @@
 # Setup
 
-## Fresh Install (Fedora/Cent OS)
+## Fresh Install (Fedora)
 ```
 # prerequisites
-yum install git openssl-devel readline-devel zlib-devel gcc-c++ make bzip2 httpie
+dnf install git openssl-devel readline-devel zlib-devel gcc-c++ make bzip2 httpie ruby
+
+# install DB
+dnf install mariadb mariadb-server mariadb-devel
+systemctl start mariadb.service
+/usr/bin/mysql_secure_installation
 
 # rbenv
 git clone https://github.com/rbenv/rbenv.git ~/.rbenv
 cd ~/.rbenv && src/configure && make -C src
+mkdir ~/bin
 ln -s /home/dstewart/.rbenv/bin/rbenv /home/dstewart/bin/rbenv
 echo 'eval "$(rbenv init -)"' >> ~/.bashrc
 source ~/.bashrc
@@ -17,18 +23,13 @@ mkdir -p "$(rbenv root)"/plugins
 git clone https://github.com/rbenv/ruby-build.git "$(rbenv root)"/plugins/ruby-build
 
 # install ruby
-rbenv install 2.5.1
+rbenv install 2.7.0
 
 # clone the repo
 git clone git@github.com:danstewart/jacks.reviews.git
 
 # copy master.key
 cp /path/to/master.key config/master.key
-
-# install DB
-dnf install mariadb mariadb-server mariadb-devel
-systemctl start mariadb.service
-/usr/bin/mysql_secure_installation
 
 # install ruby deps and setup database
 bundler

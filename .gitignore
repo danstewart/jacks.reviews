@@ -3,3 +3,6 @@
 
 # API
 api/config/master.key
+
+# custom_bulma
+custom_bulma/package-lock.json # always want the latest deps

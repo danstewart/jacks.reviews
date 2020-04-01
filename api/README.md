@@ -10,6 +10,7 @@ rspec -fd
 
 # Updating
 ```
+cd api/
 git pull
 bundler
 service nginx restart

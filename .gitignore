@@ -1,8 +1,16 @@
 # Common
 **/node_modules
+**/*.swp
 
 # API
 api/config/master.key
+api/tmp
+api/log
+api/shared/log/
+api/shared/pids/
+
+# frontend
+frontend/dist/
 
 # custom_bulma
 # always want latest deps for bulma

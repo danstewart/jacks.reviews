@@ -30,7 +30,7 @@ if Rails.env.development?
   movie_count.times do
     movie = Movie.create(
       title: Faker::Pokemon.name,
-      tmdb_id: Faker::Number.between(0, 50000),
+      tmdb_id: Faker::Number.between(from: 0, to: 50000),
       rating: ['A+', 'A', 'A-', 'B+', 'B' ].sample,
       review: Faker::Lorem.paragraph,
       image: [

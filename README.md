@@ -6,6 +6,21 @@
 # deps
 dnf install git openssl-devel readline-devel zlib-devel gcc-c++ make bzip2 httpie ruby mariadb mariadb-server mariadb-devel nginx certbot certbot-nginx
 
+# rbenv
+git clone https://github.com/rbenv/rbenv.git ~/.rbenv
+cd ~/.rbenv && src/configure && make -C src
+mkdir ~/bin
+ln -s /home/dstewart/.rbenv/bin/rbenv /home/dstewart/bin/rbenv
+echo 'eval "$(rbenv init -)"' >> ~/.bashrc
+source ~/.bashrc
+
+# ruby-build
+mkdir -p "$(rbenv root)"/plugins
+git clone https://github.com/rbenv/ruby-build.git "$(rbenv root)"/plugins/ruby-build
+
+# install ruby
+rbenv install 2.7.0
+
 # clone
 git clone git@github.com:danstewart/jacks.reviews.git
 cd jacks.reviews

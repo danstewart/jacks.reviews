@@ -1,18 +1,23 @@
-# Managing Credentials
+## Managing Credentials
 ```
 export EDITOR="vim"; rbenv exec rails credentials:edit
 ```
 
-# Test
+## Test
 ```
 rspec -fd
 ```
 
-# Updating
+## Updating
 ```
 cd api/
 git pull
 bundler
 service nginx restart
 ./start_unicorn.sh
+```
+
+## Logs
+```
+tail -f log/production.log
 ```

@@ -2,7 +2,7 @@
   <div class='add field'>
     <div class='column'>
       <h1 class='subtitle'><b>Add a movie review</b></h1>
-      <movie-review :defTags='["Action", "Funny"]' @submit='submit'></movie-review>
+      <movie-review :defTags='[]' @submit='submit'></movie-review>
     </div>
   </div>
 </template>

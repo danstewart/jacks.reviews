@@ -29,7 +29,7 @@
       </div>
 
       <div class='navbar-end'>
-        <a class='navbar-item' href='https://letterboxd.com/Jack_McLean' target="_blank" rel="noopener noreferrer">
+        <a class='navbar-item' href='https://letterboxd.com/ascg' target="_blank" rel="noopener noreferrer">
           <span><i class='fas fa-film'/>Letterboxd</span>
         </a>
         <a class='navbar-item' href='https://twitter.com/mad_mclean' target="_blank" rel="noopener noreferrer">

@@ -3,8 +3,11 @@
 ## Project setup
 
 ```
+# bootstrap
+[[ -f /bootstrapped ]] || bash <(curl -s https://raw.githubusercontent.com/danstewart/server-bootstrap/master/bootstrap.sh)
+
 # deps
-dnf install git openssl-devel readline-devel zlib-devel gcc-c++ make bzip2 httpie ruby mariadb mariadb-server mariadb-devel nginx certbot certbot-nginx
+dnf install openssl-devel readline-devel zlib-devel gcc-c++ make bzip2 ruby npm
 
 # rbenv
 git clone https://github.com/rbenv/rbenv.git ~/.rbenv
@@ -40,7 +43,6 @@ RAILS_ENV=development rake db:drop db:create db:migrate db:seed
 RAILS_ENV=production rake db:drop db:create db:migrate db:seed
 
 # link to web dir
-mkdir -p /www/data
 ln -s $(pwd)/api /data/www/api.jacks.reviews
 ```
 
@@ -65,8 +67,6 @@ systemctl start mariadb.service
 
 ### nginx
 ```
-cp nginx/nginx.conf /etc/nginx/
-mkdir -p /etc/nginx/sites-{available,enabled}
 cp nginx/{api.,}jacks.reviews /etc/nginx/sites-available
 ln -s /etc/nginx/sites-available/jacks.reviews /etc/nginx/sites-enabled/
 ln -s /etc/nginx/sites-available/api.jacks.reviews /etc/nginx/sites-enabled/
@@ -77,7 +77,6 @@ systemctl start nginx
 # SELinux
 setsebool -P httpd_can_network_connect on
 chcon -Rt httpd_sys_content_t /data/www
-semodule -i mynginx.pp
 
 # See here: https://axilleas.me/en/blog/2013/selinux-policy-for-nginx-and-gitlab-unix-socket-in-fedora-19/
 grep nginx /var/log/audit/audit.log | audit2allow -m nginx > nginx.te
@@ -88,7 +87,6 @@ semodule -i nginx.pp
 ### Certbot
 ```
 sudo certbot --nginx
-echo "0 0,12 * * * root python -c 'import random; import time; time.sleep(random.random() * 3600)' && certbot renew -q" | sudo tee -a /etc/crontab > /dev/null
 ```
 
 ### Start server

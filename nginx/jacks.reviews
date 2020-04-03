@@ -1,8 +1,5 @@
+# Certbot will rejig this into the correct SSL config
 server {
-	if ($host = www.jacks.reviews) {
-		return 301 https://jacks.reviews;
-	}
-
 	server_name jacks.reviews;
 
 	root /data/www/jacks.reviews;

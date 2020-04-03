@@ -2,6 +2,7 @@ upstream app {
 	server unix:/data/www/api.jacks.reviews/shared/sockets/unicorn.sock fail_timeout=0;
 }
 
+# Certbot will rejig this into the correct SSL config
 server {
 	server_name api.jacks.reviews;
 

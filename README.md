@@ -93,6 +93,7 @@ sudo certbot --nginx
 ```
 cd api/ && ./start_unicorn.sh
 systemctl start nginx
+sudo chown nginx:nginx api/shared/sockets/unicorn.sock
 
 # check
 http -h GET https://jacks.reviews

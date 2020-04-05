@@ -7,7 +7,7 @@
 [[ -f /bootstrapped ]] || bash <(curl -s https://raw.githubusercontent.com/danstewart/server-bootstrap/master/bootstrap.sh)
 
 # deps
-dnf install openssl-devel readline-devel zlib-devel gcc-c++ make bzip2 ruby npm
+sudo dnf install openssl-devel readline-devel zlib-devel gcc-c++ make bzip2 ruby npm
 
 # rbenv
 git clone https://github.com/rbenv/rbenv.git ~/.rbenv
@@ -27,7 +27,6 @@ rbenv install 2.7.0
 # clone
 git clone git@github.com:danstewart/jacks.reviews.git
 cd jacks.reviews
-chmod 755 /home/dstewart/
 ```
 
 ### API Setup
@@ -43,7 +42,7 @@ RAILS_ENV=development rake db:drop db:create db:migrate db:seed
 RAILS_ENV=production rake db:drop db:create db:migrate db:seed
 
 # link to web dir
-ln -s $(pwd)/api /data/www/api.jacks.reviews
+sudo ln -s $(pwd) /data/www/api.jacks.reviews
 ```
 
 ### Frontend Setup
@@ -55,33 +54,25 @@ npm install
 npm run build
 
 # link to web dir
-ln -s $(pwd)/dist/ /data/www/jacks.reviews
-```
-
-### Database
-```
-systemctl enable mariadb.service
-systemctl start mariadb.service
-/usr/bin/mysql_secure_installation
+sudo ln -s $(pwd)/dist/ /data/www/jacks.reviews
 ```
 
 ### nginx
 ```
-cp nginx/{api.,}jacks.reviews /etc/nginx/sites-available
-ln -s /etc/nginx/sites-available/jacks.reviews /etc/nginx/sites-enabled/
-ln -s /etc/nginx/sites-available/api.jacks.reviews /etc/nginx/sites-enabled/
+sudo cp nginx/{api.,}jacks.reviews /etc/nginx/sites-available
+sudo ln -s /etc/nginx/sites-available/jacks.reviews /etc/nginx/sites-enabled/
+sudo ln -s /etc/nginx/sites-available/api.jacks.reviews /etc/nginx/sites-enabled/
 
-systemctl enable nginx
-systemctl start nginx
+sudo systemctl restart nginx
 
 # SELinux
-setsebool -P httpd_can_network_connect on
-chcon -Rt httpd_sys_content_t /data/www
+grep nginx /var/log/audit/audit.log | audit2allow -M nginx
+sudo setsebool -P httpd_can_network_connect on
+sudo chcon -Rt httpd_sys_content_t /data/www
 
 # See here: https://axilleas.me/en/blog/2013/selinux-policy-for-nginx-and-gitlab-unix-socket-in-fedora-19/
-grep nginx /var/log/audit/audit.log | audit2allow -m nginx > nginx.te
-grep nginx /var/log/audit/audit.log | audit2allow -M nginx
-semodule -i nginx.pp
+sudo grep nginx /var/log/audit/audit.log | audit2allow -M nginx
+sudo semodule -i nginx.pp
 ```
 
 ### Certbot
@@ -92,7 +83,7 @@ sudo certbot --nginx
 ### Start server
 ```
 cd api/ && ./start_unicorn.sh
-systemctl start nginx
+systemctl restart nginx
 sudo chown nginx:nginx api/shared/sockets/unicorn.sock
 
 # check

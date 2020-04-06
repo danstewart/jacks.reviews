@@ -66,13 +66,8 @@ sudo ln -s /etc/nginx/sites-available/api.jacks.reviews /etc/nginx/sites-enabled
 sudo systemctl restart nginx
 
 # SELinux
-grep nginx /var/log/audit/audit.log | audit2allow -M nginx
-sudo setsebool -P httpd_can_network_connect on
-sudo chcon -Rt httpd_sys_content_t /data/www
-
-# See here: https://axilleas.me/en/blog/2013/selinux-policy-for-nginx-and-gitlab-unix-socket-in-fedora-19/
-sudo grep nginx /var/log/audit/audit.log | audit2allow -M nginx
-sudo semodule -i nginx.pp
+cd ./selinux
+./install.sh socket.te
 ```
 
 ### Certbot

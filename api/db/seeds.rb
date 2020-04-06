@@ -29,7 +29,7 @@ if Rails.env.development?
   movie_count = 10
   movie_count.times do
     movie = Movie.create(
-      title: Faker::Pokemon.name,
+      title: Faker::Games::Pokemon.name,
       tmdb_id: Faker::Number.between(from: 0, to: 50000),
       rating: ['A+', 'A', 'A-', 'B+', 'B' ].sample,
       review: Faker::Lorem.paragraph,
@@ -48,7 +48,7 @@ if Rails.env.development?
   20.times do
     MovieComment.create(
       movie_id: rand(movie_count),
-      text: Faker::PrincessBride.quote,
+      text: Faker::Movies::PrincessBride.quote,
       user: rand(2),
     )
   end

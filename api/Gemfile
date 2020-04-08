@@ -12,6 +12,7 @@ gem 'aws-sdk-ses', '~> 1.8.0'
 gem 'http'
 gem 'unicorn'
 gem 'sendgrid-ruby'
+gem 'solargraph'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false

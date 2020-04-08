@@ -8,6 +8,7 @@ api/tmp/
 api/log/
 api/shared/log/
 api/shared/pids/
+api/vendor/
 
 # frontend
 frontend/dist/

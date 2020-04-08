@@ -24,6 +24,8 @@ git clone https://github.com/rbenv/ruby-build.git "$(rbenv root)"/plugins/ruby-b
 # install ruby
 rbenv install 2.7.0
 
+bundle config set path vendor
+
 # clone
 git clone git@github.com:danstewart/jacks.reviews.git
 cd jacks.reviews

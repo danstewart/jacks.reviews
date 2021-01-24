@@ -12,13 +12,14 @@ cd jacks.reviews
 echo "KEY" > api/config/master.key
 
 # Start containers
+export MYSQL_ROOT_PASSWORD=<password>
 docker-compose up -d
 
 # Populate databases (First time only)
-MYSQL_ROOT_PASSWORD=<PASSWORD> docker-compose run app rake db:create db:migrate db:seed
+docker-compose run app rake db:create db:migrate db:seed
 
 # Import data from .sql
-docker exec -i jacksreviews_db_1 sh -c 'exec mysql -uroot -p$MYSQL_ROOT_PASSWORD prod/jacksreviews' < jacksreviews.prod.sq
+docker exec -i jacksreviews_db_1 sh -c 'exec mysql -uroot -p$0 prod/jacksreviews' $MYSQL_ROOT_PASSWORD < jacksreviews.prod.sql
 ```
 
 ### Frontend Setup

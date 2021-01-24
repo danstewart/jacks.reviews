@@ -1,0 +1,21 @@
+services:
+  db:
+    image: mariadb:10.5.8
+    restart: always
+    ports:
+      - 3306:3306
+    volumes:
+      - /data/db/jacksreviews:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+
+  app:
+    build: ./api/
+    restart: always
+    ports:
+      - 3000:3000
+    depends_on:
+      - db
+    environment:
+      RAILS_ENV: production
+      MYSQL_ROOT_PASSWORD: admin

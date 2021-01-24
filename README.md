@@ -2,49 +2,23 @@
 
 ## Project setup
 
+### API Setup with Docker
 ```
-# bootstrap
-[[ -f /bootstrapped ]] || bash <(curl -s https://raw.githubusercontent.com/danstewart/server-bootstrap/master/bootstrap.sh)
-
-# deps
-sudo dnf install openssl-devel readline-devel zlib-devel gcc-c++ make bzip2 ruby npm
-
-# rbenv
-git clone https://github.com/rbenv/rbenv.git ~/.rbenv
-cd ~/.rbenv && src/configure && make -C src
-mkdir ~/bin
-ln -s /home/dstewart/.rbenv/bin/rbenv /home/dstewart/bin/rbenv
-echo 'eval "$(rbenv init -)"' >> ~/.bashrc
-source ~/.bashrc
-
-# ruby-build
-mkdir -p "$(rbenv root)"/plugins
-git clone https://github.com/rbenv/ruby-build.git "$(rbenv root)"/plugins/ruby-build
-
-# install ruby
-rbenv install 2.7.0
-
-bundle config set path vendor
-
-# clone
+# Clone
 git clone git@github.com:danstewart/jacks.reviews.git
 cd jacks.reviews
-```
 
-### API Setup
-```
-cd ./api
+# Populate master.key
+echo "KEY" > api/config/master.key
 
-# copy master.key
-cp /path/to/master.key config/master.key
+# Start containers
+docker-compose up -d
 
-# install ruby deps and setup database
-bundler
-RAILS_ENV=development rake db:drop db:create db:migrate db:seed
-RAILS_ENV=production rake db:drop db:create db:migrate db:seed
+# Populate databases (First time only)
+MYSQL_ROOT_PASSWORD=<PASSWORD> docker-compose run app rake db:create db:migrate db:seed
 
-# link to web dir
-sudo ln -s $(pwd) /data/www/api.jacks.reviews
+# Import data from .sql
+docker exec -i jacksreviews_db_1 sh -c 'exec mysql -uroot -p$MYSQL_ROOT_PASSWORD prod/jacksreviews' < jacksreviews.prod.sq
 ```
 
 ### Frontend Setup
@@ -66,26 +40,11 @@ sudo ln -s /etc/nginx/sites-available/jacks.reviews /etc/nginx/sites-enabled/
 sudo ln -s /etc/nginx/sites-available/api.jacks.reviews /etc/nginx/sites-enabled/
 
 sudo systemctl restart nginx
-
-# SELinux
-cd ./selinux
-./install.sh socket.te
 ```
 
 ### Certbot
 ```
 sudo certbot --nginx
-```
-
-### Start server
-```
-cd api/ && ./start_unicorn.sh
-systemctl restart nginx
-sudo chown nginx:nginx api/shared/sockets/unicorn.sock
-
-# check
-http -h GET https://jacks.reviews
-http -h GET https://api.jacks.reviews/movies
 ```
 
 ---

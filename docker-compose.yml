@@ -18,4 +18,4 @@ services:
       - db
     environment:
       RAILS_ENV: production
-      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}

@@ -41,7 +41,7 @@ if Rails.env.development?
     )
 
     # Add tags to movie
-    movie_tags = MovieTag.create(movie_id: movie[:id], tag_id: [1,2,3].sample(rand 2))
+    movie_tags = MovieTag.create(movie_id: movie[:id], tag_id: [1,2,3].sample,
   end
 
   20.times do

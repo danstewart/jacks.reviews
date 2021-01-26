@@ -35,15 +35,17 @@
                 <a href='#' v-for='(tag, index) in movie.tags' :key='index'>#{{ tag }} </a>
               </div>
 
-              <div style='float: right'>
-                <a @click='toggleComments(index)'>{{ commentCount(movie) }}</a>
-              </div>
+              <!-- TODO: Support comments -->
+              <!-- <div style='float: right'> -->
+                <!-- <a @click='toggleComments(index)'>{{ commentCount(movie) }}</a> -->
+              <!-- </div> -->
               <br/>
             </div>
 
-            <div ref='comments' v-if='showComments' >
-              <comment-section :movieId='index' :comments='movie.comments'></comment-section>
-            </div>
+            <!-- TODO: Support comments -->
+            <!-- <div ref='comments' v-if='showComments' > -->
+              <!-- <comment-section :movieId='index' :comments='movie.comments'></comment-section> -->
+            <!-- </div> -->
 
             <div class='card-footer' v-if='loggedIn'>
               <a class='card-footer-item' :href='`/#/edit/${movie.id}`'>Edit</a>

@@ -1,5 +1,7 @@
 // Config data
-export const config = { 
-    // endpoint: 'http://127.0.0.1:3000' // test
-    endpoint: 'https://api.jacks.reviews',
+
+const isLocal = !window.localStorage.getItem('forceProd') && window.location.hostname.indexOf('127.0.0.1') != -1;
+
+export const config = {
+    endpoint: isLocal ? 'http://127.0.0.1:3000' : 'https://api.jacks.reviews'
 }

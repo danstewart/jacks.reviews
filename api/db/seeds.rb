@@ -34,10 +34,9 @@ if Rails.env.development?
       rating: ['A+', 'A', 'A-', 'B+', 'B' ].sample,
       review: Faker::Lorem.paragraph,
       image: [
-        'https://image.tmdb.org/t/p/w300/hEpWvX6Bp79eLxY1kX5ZZJcme5U.jpg',
-        'https://image.tmdb.org/t/p/w300/140ewbWv8qHStD3mlBDvvGd0Zvu.jpg',
-        'https://image.tmdb.org/t/p/w300/1AreNcL9s24Qfghbzomy0IlzCFk.jpg',
-        'https://image.tmdb.org/t/p/w300/93Y9BGx8blzmZOPSoivkFfaifqU.jpg'
+        'https://image.tmdb.org/t/p/w300/6FfCtAuVAW8XJjZ7eWeLibRLWTw.jpg',
+        'https://image.tmdb.org/t/p/w300/yHA9Fc37VmpUA5UncTxxo3rTGVA.jpg',
+        'https://image.tmdb.org/t/p/w300/2uNW4WbgBXL25BAbXGLnLqX71Sw.jpg',
       ].sample
     )
 

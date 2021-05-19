@@ -5,7 +5,7 @@ ruby '2.7.0'
 
 gem 'rails', '~> 5.2.1'
 gem 'mysql2'
-gem 'puma', '~> 3.12'
+gem 'puma', '~> 4.3'
 gem 'jwt'
 gem 'faker'
 gem 'aws-sdk-ses', '~> 1.8.0'
